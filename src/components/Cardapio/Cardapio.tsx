@@ -6,13 +6,13 @@ import {
   pizzas,
   sobremesas,
   steaks,
-} from "./CardapioItem/ProdutosMock";
+} from "./ProdutosMock";
 import { useEffect, useState } from "react";
 
 export default function Cardapio() {
-  const [divItensCardapio, setDivItensCardapio] = useState(null);
+  const [divItensCardapio, setDivItensCardapio] = useState<HTMLElement>();
 
-  const getObjectByString = (str: string): Produto[] => {
+  const getObjectByString = (str: string) => {
     const objectMap = {
       burgers: { value: burgers },
       bebidas: { value: bebidas },
@@ -22,23 +22,25 @@ export default function Cardapio() {
       steaks: { value: steaks },
     };
 
-    return objectMap[str].value || null;
+    return objectMap[str] || null;
   };
 
-  const handleCategoryButton = (category) => {
+  const handleCategoryButton = (category: string) => {
     const product = getObjectByString(category);
 
-    const html = product.map((item, index) => (
-      <>
-        <CardapioItem
-          dsc={item.dsc}
-          id={item.id}
-          img={item.img}
-          name={item.name}
-          price={item.price}
-        />
-      </>
-    ));
+    const html =
+      product &&
+      product.value.map((item, index) => (
+        <>
+          <CardapioItem
+            dsc={item.dsc}
+            id={item.id}
+            img={item.img}
+            name={item.name}
+            price={item.price}
+          />
+        </>
+      ));
 
     setDivItensCardapio(html);
   };

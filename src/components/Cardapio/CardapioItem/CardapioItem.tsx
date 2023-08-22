@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Produto } from "./ProdutosMock";
+import { Produto } from "../ProdutosMock";
 
 export default function CardapioItem(produtoItem: Produto) {
   return (

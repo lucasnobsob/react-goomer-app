@@ -1,6 +1,9 @@
 import logo from "../../assets/images/logo.png";
+import { useModal } from "../../context/CarrinhoContext";
 
 export default function Menu() {
+  const { setModalCarrinho } = useModal();
+
   return (
     <section className="header">
       <div className="container">
@@ -41,7 +44,10 @@ export default function Menu() {
                 </a>
               </li>
             </ul>
-            <a className="btn btn-white btn-icon wow fadeIn">
+            <a
+              className="btn btn-white btn-icon wow fadeIn"
+              onClick={() => setModalCarrinho(true)}
+            >
               Meu carrinho
               <span className="icon">
                 <div className="container-total-carrinho badge-total-carrinho hidden">
