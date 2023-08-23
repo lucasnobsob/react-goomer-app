@@ -1,7 +1,8 @@
 import { useCarrinho } from "../../../context/CarrinhoContext";
+import { CarrinhoItem } from "../../../models/CarrinhoModel";
 
 export default function ResumoCarrinho() {
-  const { etapa } = useCarrinho();
+  const { etapa, carrinho } = useCarrinho();
 
   return (
     <div
@@ -15,7 +16,34 @@ export default function ResumoCarrinho() {
       </div>
 
       <div className="col-12">
-        <div className="row" id="listaItensResumo"></div>
+        <div className="row" id="listaItensResumo">
+          {carrinho.itens &&
+            carrinho.itens.map((item: CarrinhoItem) => {
+              return (
+                <div className="col-12 item-carrinho resumo">
+                  <div className="img-produto-resumo">
+                    <img src={item.produto.img} />
+                  </div>
+                  <div className="dados-produto">
+                    <p className="title-produto-resumo">
+                      <b>{item.produto.name}</b>
+                    </p>
+                    <p className="price-produto-resumo">
+                      <b>
+                        {item.produto.price.toLocaleString("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        })}
+                      </b>
+                    </p>
+                  </div>
+                  <p className="quantidade-produto-resumo">
+                    x <b>{item.qtde}</b>
+                  </p>
+                </div>
+              );
+            })}
+        </div>
       </div>
 
       <div className="col-12">

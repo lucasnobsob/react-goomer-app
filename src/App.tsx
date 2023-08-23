@@ -17,8 +17,6 @@ import { CarrinhoProvider } from "./context/CarrinhoContext";
 function App() {
   return (
     <>
-      <div className="container-mensagens" id="container-mensagens"></div>
-
       <CarrinhoProvider>
         <Menu></Menu>
         <Carrinho></Carrinho>

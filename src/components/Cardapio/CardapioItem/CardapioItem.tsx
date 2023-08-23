@@ -10,6 +10,12 @@ export default function CardapioItem(produtoItem: ProdutoModel) {
     if (qtdeItem > 0) setQtdeItem(qtdeItem - 1);
   };
 
+  const handleButtonAddCarrinho = () => {
+    handleAddCarrinho(produtoItem, qtdeItem);
+    setQtdeItem(0);
+    setEtapa(1);
+  };
+
   return (
     <div className="col-12 col-lg-3 col-md-3 col-sm-6 mb-5 animated fadeInUp">
       <div className="card card-item" id={produtoItem.id}>
@@ -37,14 +43,7 @@ export default function CardapioItem(produtoItem: ProdutoModel) {
           <span className="btn-mais" onClick={() => setQtdeItem(qtdeItem + 1)}>
             <i className="fas fa-plus"></i>
           </span>
-          <span
-            className="btn btn-add"
-            onClick={() => {
-              handleAddCarrinho(produtoItem, qtdeItem);
-              setQtdeItem(0);
-              setEtapa(1);
-            }}
-          >
+          <span className="btn btn-add" onClick={handleButtonAddCarrinho}>
             <i className="fa fa-shopping-bag"></i>
           </span>
         </div>

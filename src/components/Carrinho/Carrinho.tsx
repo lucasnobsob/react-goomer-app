@@ -106,16 +106,24 @@ export default function Carrinho() {
 
             {etapa == 1 && (
               <a
-                className="btn btn-yellow float-right"
+                className={`btn btn-yellow float-right ${
+                  carrinho.itens.length == 0 ? "disabled-button" : ""
+                }`}
                 id="btnEtapaPedido"
-                onClick={() => setEtapa(2)}
+                onClick={() => {
+                  if (carrinho.itens.length > 0) setEtapa(2);
+                }}
               >
                 Continuar
               </a>
             )}
 
             {etapa == 2 && (
-              <a className="btn btn-yellow float-right" id="btnEtapaEndereco">
+              <a
+                className="btn btn-yellow float-right"
+                id="btnEtapaEndereco"
+                onClick={() => setEtapa(3)}
+              >
                 Revisar pedido
               </a>
             )}

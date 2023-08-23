@@ -1,6 +1,8 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { CarrinhoModel } from "../models/CarrinhoModel";
+import { CarrinhoItem, CarrinhoModel } from "../models/CarrinhoModel";
 import { ProdutoModel } from "../models/ProdutoModel";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CarrinhoContext = createContext();
 
@@ -15,48 +17,71 @@ export function CarrinhoProvider({ children }) {
     itens: [],
   });
 
+  const handleToast = (message: string) => {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+  };
+
+  const atualizaTotais = (cart: CarrinhoModel) => {
+    const subTotal = cart.itens.reduce((total, item) => {
+      return total + item.qtde * item.produto.price;
+    }, 0);
+
+    cart.subTotal = subTotal;
+    cart.valorTotal = subTotal + carrinho.valorEntrega;
+    return cart;
+  };
+
   const handleAddCarrinho = (produto: ProdutoModel, qtde: number) => {
     const prdIndex = carrinho.itens.findIndex(
       (x) => x.produto.id === produto.id
     );
 
-    let novoCarrinho = null,
-      novosItens = null;
-    let subTotal = 0;
+    let carrinhoClone = JSON.parse(JSON.stringify(carrinho));
 
     if (prdIndex !== -1) {
-      novosItens = [...carrinho.itens];
-      novosItens[prdIndex].qtde += qtde;
-
-      novoCarrinho = {
-        ...carrinho,
-        itens: novosItens,
-      };
+      carrinhoClone.itens[prdIndex].qtde += qtde;
     } else {
-      const novoItem = {
-        produto: produto,
-        qtde: qtde,
-      };
-
-      novoCarrinho = {
-        ...carrinho,
-        itens: [novoItem],
-      };
+      carrinhoClone.itens.push({ produto, qtde });
     }
 
-    novosItens = novoCarrinho.itens.map((item) => {
-      const novoItem = {
-        ...item,
-        subtotalItem: item.produto.price * item.qtde,
-      };
-      subTotal += novoItem.subtotalItem;
-      return novoItem;
-    });
+    carrinhoClone = atualizaTotais(carrinhoClone);
 
-    novoCarrinho.subTotal = subTotal;
-    novoCarrinho.valorTotal = subTotal + carrinho.valorEntrega;
+    setCarrinho(carrinhoClone);
+    handleToast("Item adicionado ao carrinho");
+  };
 
-    setCarrinho(novoCarrinho);
+  const handlePlusItem = (index: number) => {
+    let carrinhoClone = JSON.parse(JSON.stringify(carrinho));
+
+    carrinhoClone.itens[index].qtde += 1;
+    carrinhoClone = atualizaTotais(carrinhoClone);
+    setCarrinho(carrinhoClone);
+  };
+
+  const handleMinusItem = (index: number) => {
+    let carrinhoClone = JSON.parse(JSON.stringify(carrinho));
+
+    if (carrinhoClone.itens[index].qtde > 1) {
+      carrinhoClone.itens[index].qtde -= 1;
+      carrinhoClone = atualizaTotais(carrinhoClone);
+    }
+
+    setCarrinho(carrinhoClone);
+  };
+
+  const handleRemoveItem = (index: number) => {
+    let carrinhoClone = JSON.parse(JSON.stringify(carrinho));
+
+    carrinhoClone.itens.splice(index, 1);
+    carrinhoClone = atualizaTotais(carrinhoClone);
+    setCarrinho(carrinhoClone);
   };
 
   useEffect(() => {
@@ -73,9 +98,13 @@ export function CarrinhoProvider({ children }) {
         etapa,
         setEtapa,
         handleAddCarrinho,
+        handlePlusItem,
+        handleMinusItem,
+        handleRemoveItem,
       }}
     >
       {children}
+      <ToastContainer />
     </CarrinhoContext.Provider>
   );
 }

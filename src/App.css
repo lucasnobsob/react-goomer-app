@@ -39,3 +39,26 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Exemplo de estilo para o container dos toasts */
+.ToastContainer {
+  width: 320px;
+}
+
+/* Exemplo de estilo para um toast de sucesso */
+.Toastify__toast--success {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Exemplo de estilo para um toast de erro */
+.Toastify__toast--error {
+  background-color: #f44336;
+  color: white;
+}
+
+.disabled-button {
+  pointer-events: none; /* Impede interações com o link */
+  opacity: 0.5; /* Reduz a opacidade para indicar desabilitação */
+  cursor: not-allowed; /* Muda o cursor para indicar que não é clicável */
+}
