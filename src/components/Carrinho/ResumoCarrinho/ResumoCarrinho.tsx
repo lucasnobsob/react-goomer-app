@@ -1,6 +1,13 @@
+import { useCarrinho } from "../../../context/CarrinhoContext";
+
 export default function ResumoCarrinho() {
+  const { etapa } = useCarrinho();
+
   return (
-    <div id="resumoCarrinho" className="row mr-0 ml-0 animated fadeIn hidden">
+    <div
+      id="resumoCarrinho"
+      className={`row mr-0 ml-0 animated fadeIn ${etapa != 3 ? "hidden" : ""}`}
+    >
       <div className="col-12">
         <p className="title-carrinho mt-4">
           <b>Itens do pedido:</b>

@@ -1,4 +1,3 @@
-import "./Banner.css";
 import burger from "../../assets/images/burguer.png";
 
 function Banner() {

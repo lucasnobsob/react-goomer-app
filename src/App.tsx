@@ -12,23 +12,22 @@ import Depoimentos from "./components/Depoimentos/Depoimentos";
 import Reserva from "./components/Reserva/Reserva";
 import Servicos from "./components/Servicos/Servicos";
 import Carrinho from "./components/Carrinho/Carrinho";
-import { ModalProvider } from "./context/CarrinhoContext";
+import { CarrinhoProvider } from "./context/CarrinhoContext";
 
 function App() {
   return (
     <>
       <div className="container-mensagens" id="container-mensagens"></div>
 
-      <ModalProvider>
+      <CarrinhoProvider>
         <Menu></Menu>
         <Carrinho></Carrinho>
-      </ModalProvider>
-
-      <Banner></Banner>
-      <Servicos></Servicos>
-      <Cardapio></Cardapio>
-      <Depoimentos></Depoimentos>
-      <Reserva></Reserva>
+        <Banner></Banner>
+        <Servicos></Servicos>
+        <Cardapio></Cardapio>
+        <Depoimentos></Depoimentos>
+        <Reserva></Reserva>
+      </CarrinhoProvider>
 
       <footer>
         <div className="container">

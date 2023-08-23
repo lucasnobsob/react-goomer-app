@@ -1,6 +1,13 @@
+import { useCarrinho } from "../../../context/CarrinhoContext";
+
 export default function LocalEntrega() {
+  const { etapa } = useCarrinho();
+
   return (
-    <div id="localEntrega" className="row mr-0 ml-0 animated fadeIn hidden">
+    <div
+      id="localEntrega"
+      className={`row mr-0 ml-0 animated fadeIn ${etapa != 2 ? "hidden" : ""}`}
+    >
       <div className="col-12 col-lg-4 col-md-4 col-sm-12">
         <div className="form-group container-cep">
           <label>CEP:</label>

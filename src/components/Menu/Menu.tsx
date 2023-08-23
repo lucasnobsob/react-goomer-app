@@ -1,8 +1,8 @@
 import logo from "../../assets/images/logo.png";
-import { useModal } from "../../context/CarrinhoContext";
+import { useCarrinho } from "../../context/CarrinhoContext";
 
 export default function Menu() {
-  const { setModalCarrinho } = useModal();
+  const { carrinho, botaoCarrinho, setModalCarrinho } = useCarrinho();
 
   return (
     <section className="header">
@@ -50,8 +50,12 @@ export default function Menu() {
             >
               Meu carrinho
               <span className="icon">
-                <div className="container-total-carrinho badge-total-carrinho hidden">
-                  0
+                <div
+                  className={`container-total-carrinho badge-total-carrinho ${
+                    botaoCarrinho ? "" : "hidden"
+                  }`}
+                >
+                  {carrinho.itens.length}
                 </div>
                 <i className="fa fa-shopping-bag"></i>
               </span>

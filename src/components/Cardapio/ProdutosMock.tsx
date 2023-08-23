@@ -1,12 +1,6 @@
-export interface Produto {
-  id: string;
-  img: string;
-  name: string;
-  dsc: string;
-  price: number;
-}
+import { ProdutoModel } from "../../models/ProdutoModel";
 
-export const churrasco: Produto[] = [
+export const churrasco: ProdutoModel[] = [
   {
     id: "ribs-brisket-and-burnt-ends",
     img: "/src/assets/images/cardapio/churrasco/joes-kc-ribs-brisket-and-burnt-ends.6710e994980e485e6441b794717ad6fb.jpg",
@@ -92,7 +86,7 @@ export const churrasco: Produto[] = [
     price: 269,
   },
 ];
-export const burgers: Produto[] = [
+export const burgers: ProdutoModel[] = [
   {
     id: "the-gramercy-tavern-burger-4-pack",
     img: "/src/assets/images/cardapio/burguers/Gramercy-Tavern-Burger-and-Kielbasa-Kit-6.4.21-72ppi-1x1-15.jpg",
@@ -178,7 +172,7 @@ export const burgers: Produto[] = [
     price: 149,
   },
 ];
-export const sobremesas: Produto[] = [
+export const sobremesas: ProdutoModel[] = [
   {
     id: "15259-german-chocolate-killer-brownie-tin-pack",
     img: "/src/assets/images/cardapio/sobremesas/german-chocolate-killer-brownie-tin-pack.5ebc34160f28767a9d94c4da2e04c4b9.jpg",
@@ -264,7 +258,7 @@ export const sobremesas: Produto[] = [
     price: 69.95,
   },
 ];
-export const bebidas: Produto[] = [
+export const bebidas: ProdutoModel[] = [
   {
     id: "hong-kong-boba-tea-kit-for-6",
     img: "/src/assets/images/cardapio/bebidas/hong-kong-boba-tea-kit-for-6.63841de36d8e5edfafa13023fc303285.jpg",
@@ -350,7 +344,7 @@ export const bebidas: Produto[] = [
     price: 40,
   },
 ];
-export const pizzas: Produto[] = [
+export const pizzas: ProdutoModel[] = [
   {
     id: "2-lou-malnatis-deep-dish-pizzas",
     img: "/src/assets/images/cardapio/pizzas/2-lou-malnatis-deep-dish-pizzas.bf0fe065d251a9cca3925b269d443a27.jpg",
@@ -436,7 +430,7 @@ export const pizzas: Produto[] = [
     price: 79,
   },
 ];
-export const steaks: Produto[] = [
+export const steaks: ProdutoModel[] = [
   {
     id: "california-reserve-filet-mignon-steaks-gift-box",
     img: "/src/assets/images/cardapio/steaks/california-reserve-filet-mignon-steaks-gift-box.bf226e317aad85f47897ae7e325f790d.jpg",

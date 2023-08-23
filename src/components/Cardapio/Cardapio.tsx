@@ -30,7 +30,7 @@ export default function Cardapio() {
 
     const html =
       product &&
-      product.value.map((item, index) => (
+      product.value.map((item) => (
         <>
           <CardapioItem
             dsc={item.dsc}

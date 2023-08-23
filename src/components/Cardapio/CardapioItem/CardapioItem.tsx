@@ -1,9 +1,18 @@
-import { Produto } from "../ProdutosMock";
+import { useState } from "react";
+import { ProdutoModel } from "../../../models/ProdutoModel";
+import { useCarrinho } from "../../../context/CarrinhoContext";
 
-export default function CardapioItem(produtoItem: Produto) {
+export default function CardapioItem(produtoItem: ProdutoModel) {
+  const [qtdeItem, setQtdeItem] = useState<number>(0);
+  const { handleAddCarrinho, setEtapa } = useCarrinho();
+
+  const handleSubtracaoItem = () => {
+    if (qtdeItem > 0) setQtdeItem(qtdeItem - 1);
+  };
+
   return (
     <div className="col-12 col-lg-3 col-md-3 col-sm-6 mb-5 animated fadeInUp">
-      <div className="card card-item" id="the-gramercy-tavern-burger-4-pack">
+      <div className="card card-item" id={produtoItem.id}>
         <div className="img-produto">
           <img src={produtoItem.img} />
         </div>
@@ -19,16 +28,23 @@ export default function CardapioItem(produtoItem: Produto) {
           </b>
         </p>
         <div className="add-carrinho">
-          <span className="btn-menos">
+          <span className="btn-menos" onClick={() => handleSubtracaoItem()}>
             <i className="fas fa-minus"></i>
           </span>
           <span className="add-numero-itens" id={`qtd-${produtoItem.id}`}>
-            0
+            {qtdeItem}
           </span>
-          <span className="btn-mais">
+          <span className="btn-mais" onClick={() => setQtdeItem(qtdeItem + 1)}>
             <i className="fas fa-plus"></i>
           </span>
-          <span className="btn btn-add">
+          <span
+            className="btn btn-add"
+            onClick={() => {
+              handleAddCarrinho(produtoItem, qtdeItem);
+              setQtdeItem(0);
+              setEtapa(1);
+            }}
+          >
             <i className="fa fa-shopping-bag"></i>
           </span>
         </div>
