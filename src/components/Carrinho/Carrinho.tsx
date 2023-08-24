@@ -1,19 +1,22 @@
 import { useCarrinho } from "../../context/CarrinhoContext";
-import { CarrinhoModel } from "../../models/CarrinhoModel";
 import ItensCarrinho from "./ItensCarrinho/ItensCarrinho";
 import LocalEntrega from "./LocalEntrega/LocalEntrega";
 import ResumoCarrinho from "./ResumoCarrinho/ResumoCarrinho";
+import Rodape from "./Rodape/Rodape";
 
 export default function Carrinho() {
-  const {
-    carrinho,
-    modalCarrinho,
-    botaoCarrinho,
-    etapa,
-    setEtapa,
-    setModalCarrinho,
-  } = useCarrinho();
-  const carrinhoState: CarrinhoModel = carrinho;
+  const { carrinho, modalCarrinho, botaoCarrinho, etapa, setModalCarrinho } =
+    useCarrinho();
+
+  const textStyle = {
+    textAlign: "left",
+  };
+
+  const contarProdutosNoCarrinho = () => {
+    return carrinho.itens.reduce((total, item) => {
+      return total + item.qtde;
+    }, 0);
+  };
 
   return (
     <>
@@ -23,7 +26,7 @@ export default function Carrinho() {
         }`}
         onClick={() => setModalCarrinho(true)}
       >
-        <div className="badge-total-carrinho">{carrinhoState.itens.length}</div>
+        <div className="badge-total-carrinho">{contarProdutosNoCarrinho()}</div>
         <i className="fa fa-shopping-bag"></i>
       </a>
 
@@ -31,6 +34,7 @@ export default function Carrinho() {
         className={`modal-full animated fadeIn ${
           !modalCarrinho ? "hidden" : ""
         }`}
+        style={textStyle}
         id="modalCarrinho"
       >
         <div className="m-header">
@@ -68,86 +72,7 @@ export default function Carrinho() {
 
         <div className="m-footer">
           <div className="container">
-            <div className="container-total text-right mb-4">
-              <p className="mb-0">
-                <span>Subtotal:</span>
-                <span id="lblSubTotal">
-                  {carrinhoState.subTotal.toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  })}
-                </span>
-              </p>
-              <p className="mb-0 texto-entrega">
-                <span>
-                  <i className="fas fa-motorcycle"></i> Entrega:
-                </span>
-                <span id="lblValorEntrega">
-                  {carrinhoState.valorEntrega.toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  })}
-                </span>
-              </p>
-              <p className="mb-0 texto-total">
-                <span>
-                  <b>Total:</b>
-                </span>
-                <span className="valor-total">
-                  <b id="lblValorTotal">
-                    {carrinhoState.valorTotal.toLocaleString("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    })}
-                  </b>
-                </span>
-              </p>
-            </div>
-
-            {etapa == 1 && (
-              <a
-                className={`btn btn-yellow float-right ${
-                  carrinho.itens.length == 0 ? "disabled-button" : ""
-                }`}
-                id="btnEtapaPedido"
-                onClick={() => {
-                  if (carrinho.itens.length > 0) setEtapa(2);
-                }}
-              >
-                Continuar
-              </a>
-            )}
-
-            {etapa == 2 && (
-              <a
-                className="btn btn-yellow float-right"
-                id="btnEtapaEndereco"
-                onClick={() => setEtapa(3)}
-              >
-                Revisar pedido
-              </a>
-            )}
-
-            {etapa == 3 && (
-              <a
-                href="#"
-                className="btn btn-yellow float-right"
-                id="btnEtapaResumo"
-                target="_blank"
-              >
-                Enviar pedido
-              </a>
-            )}
-
-            {etapa > 1 && (
-              <a
-                className="btn btn-white float-right mr-3"
-                id="btnVoltar"
-                onClick={() => setEtapa(etapa - 1)}
-              >
-                Voltar
-              </a>
-            )}
+            <Rodape />
           </div>
         </div>
       </div>

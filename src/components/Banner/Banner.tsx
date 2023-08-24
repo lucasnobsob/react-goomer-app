@@ -31,7 +31,7 @@ function Banner() {
               </div>
             </div>
             <a
-              href="https://www.instagram.com/limafront/"
+              href="#"
               target="_blank"
               className="btn btn-sm btn-white btn-social mt-4 mr-3 wow fadeIn delay-05s"
             >
@@ -55,7 +55,7 @@ function Banner() {
               <br />A comida chegou quente e <br />
               muito saborosa!"
               <span className="card-case-name">
-                <b>Thiago Lopes</b>
+                <b>Lucas Sobrinho</b>
               </span>
             </div>
           </div>

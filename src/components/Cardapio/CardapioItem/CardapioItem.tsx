@@ -11,9 +11,11 @@ export default function CardapioItem(produtoItem: ProdutoModel) {
   };
 
   const handleButtonAddCarrinho = () => {
-    handleAddCarrinho(produtoItem, qtdeItem);
-    setQtdeItem(0);
-    setEtapa(1);
+    if (qtdeItem > 0) {
+      handleAddCarrinho(produtoItem, qtdeItem);
+      setQtdeItem(0);
+      setEtapa(1);
+    }
   };
 
   return (

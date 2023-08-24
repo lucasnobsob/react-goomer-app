@@ -1,7 +1,42 @@
 import { useCarrinho } from "../../../context/CarrinhoContext";
 
 export default function LocalEntrega() {
-  const { etapa } = useCarrinho();
+  const { etapa, endereco, setEndereco } = useCarrinho();
+
+  const handleCEPChange = (event) => {
+    const novoCEP = event.target.value;
+    setEndereco({ ...endereco, cep: novoCEP });
+  };
+
+  const handleEnderecoChange = (event) => {
+    const novoEndereco = event.target.value;
+    setEndereco({ ...endereco, endereco: novoEndereco });
+  };
+
+  const handleBairroChange = (event) => {
+    const novoBairro = event.target.value;
+    setEndereco({ ...endereco, bairro: novoBairro });
+  };
+
+  const handleNumeroChange = (event) => {
+    const novoNumero = event.target.value;
+    setEndereco({ ...endereco, numero: novoNumero });
+  };
+
+  const handleCidadeChange = (event) => {
+    const novaCidade = event.target.value;
+    setEndereco({ ...endereco, cidade: novaCidade });
+  };
+
+  const handleComplementoChange = (event) => {
+    const novoComplemento = event.target.value;
+    setEndereco({ ...endereco, complemento: novoComplemento });
+  };
+
+  const handleUFChange = (event) => {
+    const novaUF = event.target.value;
+    setEndereco({ ...endereco, uf: novaUF });
+  };
 
   return (
     <div
@@ -11,7 +46,13 @@ export default function LocalEntrega() {
       <div className="col-12 col-lg-4 col-md-4 col-sm-12">
         <div className="form-group container-cep">
           <label>CEP:</label>
-          <input id="txtCEP" type="text" className="form-control" />
+          <input
+            id="txtCEP"
+            type="text"
+            className="form-control"
+            value={endereco.cep}
+            onChange={handleCEPChange}
+          />
           <a className="btn btn-yellow btn-sm">
             <i className="fa fa-search"></i>
           </a>
@@ -23,42 +64,72 @@ export default function LocalEntrega() {
       <div className="col-12 col-lg-6 col-md-6 col-sm-12">
         <div className="form-group">
           <label>Endereço:</label>
-          <input id="txtEndereco" type="text" className="form-control" />
+          <input
+            id="txtEndereco"
+            type="text"
+            className="form-control"
+            value={endereco.endereco}
+            onChange={handleEnderecoChange}
+          />
         </div>
       </div>
 
       <div className="col-12 col-lg-4 col-md-4 col-sm-12">
         <div className="form-group">
           <label>Bairro:</label>
-          <input id="txtBairro" type="text" className="form-control" />
+          <input
+            id="txtBairro"
+            type="text"
+            className="form-control"
+            value={endereco.bairro}
+            onChange={handleBairroChange}
+          />
         </div>
       </div>
 
       <div className="col-12 col-lg-2 col-md-2 col-sm-12">
         <div className="form-group">
           <label>Número:</label>
-          <input id="txtNumero" type="text" className="form-control" />
+          <input
+            id="txtNumero"
+            type="text"
+            className="form-control"
+            value={endereco.numero}
+            onChange={handleNumeroChange}
+          />
         </div>
       </div>
 
       <div className="col-12 col-lg-6 col-md-6 col-sm-12">
         <div className="form-group">
           <label>Cidade:</label>
-          <input id="txtCidade" type="text" className="form-control" />
+          <input
+            id="txtCidade"
+            type="text"
+            className="form-control"
+            value={endereco.cidade}
+            onChange={handleCidadeChange}
+          />
         </div>
       </div>
 
       <div className="col-12 col-lg-4 col-md-4 col-sm-12">
         <div className="form-group">
           <label>Complemento:</label>
-          <input id="txtComplemento" type="text" className="form-control" />
+          <input
+            id="txtComplemento"
+            type="text"
+            className="form-control"
+            value={endereco.complemento}
+            onChange={handleComplementoChange}
+          />
         </div>
       </div>
 
       <div className="col-12 col-lg-2 col-md-2 col-sm-12">
         <div className="form-group">
           <label>UF:</label>
-          <select id="ddlUf" className="form-control">
+          <select id="ddlUf" className="form-control" onChange={handleUFChange}>
             <option value="-1">...</option>
             <option value="AC">AC</option>
             <option value="AL">AL</option>

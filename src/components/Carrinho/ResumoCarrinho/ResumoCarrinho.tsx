@@ -2,7 +2,7 @@ import { useCarrinho } from "../../../context/CarrinhoContext";
 import { CarrinhoItem } from "../../../models/CarrinhoModel";
 
 export default function ResumoCarrinho() {
-  const { etapa, carrinho } = useCarrinho();
+  const { etapa, carrinho, endereco } = useCarrinho();
 
   return (
     <div
@@ -58,9 +58,12 @@ export default function ResumoCarrinho() {
         </div>
         <div className="dados-produto">
           <p className="texto-endereco">
-            <b id="resumoEndereco"></b>
+            <b id="resumoEndereco">{`${endereco.endereco}, ${endereco.numero}, ${endereco.bairro}`}</b>
           </p>
-          <p className="cidade-endereco" id="cidadeEndereco"></p>
+          <p
+            className="cidade-endereco"
+            id="cidadeEndereco"
+          >{`${endereco.cidade}-${endereco.uf} / ${endereco.cep}, ${endereco.complemento}`}</p>
         </div>
       </div>
     </div>
