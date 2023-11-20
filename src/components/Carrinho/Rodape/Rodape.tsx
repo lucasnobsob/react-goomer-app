@@ -5,33 +5,29 @@ export default function Rodape() {
   const { carrinho, etapa, setEtapa, endereco, handleToast } = useCarrinho();
   const enviarPedidoButton = useRef(null);
 
-  const handleEnderecoPreenchido = (): boolean => {
-    if (!endereco.cep.trim()) {
-      handleToast("O campo CEP precisa ser preenchido", false);
-      return false;
-    }
-    if (!endereco.endereco.trim()) {
-      handleToast("O campo Endereço precisa ser preenchido", false);
-      return false;
-    }
-    if (!endereco.bairro.trim()) {
-      handleToast("O campo Bairro precisa ser preenchido", false);
-      return false;
-    }
-    if (!endereco.numero.trim()) {
-      handleToast("O campo Número precisa ser preenchido", false);
-      return false;
-    }
-    if (!endereco.cidade.trim()) {
-      handleToast("O campo Cidade precisa ser preenchido", false);
-      return false;
-    }
-    if (!endereco.uf.trim()) {
-      handleToast("O campo UF precisa ser preenchido", false);
-      return false;
-    }
+  const handleEnderecoPreenchido = () => {
+    const campos = [
+      { campo: "cep", mensagem: "O campo CEP precisa ser preenchido" },
+      {
+        campo: "endereco",
+        mensagem: "O campo Endereço precisa ser preenchido",
+      },
+      { campo: "bairro", mensagem: "O campo Bairro precisa ser preenchido" },
+      { campo: "numero", mensagem: "O campo Número precisa ser preenchido" },
+      { campo: "cidade", mensagem: "O campo Cidade precisa ser preenchido" },
+      { campo: "uf", mensagem: "O campo UF precisa ser preenchido" },
+    ];
 
-    return true;
+    let isValid = true;
+
+    campos.forEach(({ campo, mensagem }) => {
+      if (!endereco[campo].trim()) {
+        handleToast(mensagem, false);
+        isValid = false;
+      }
+    });
+
+    return isValid;
   };
 
   const montaTextoWhatsapp = () => {

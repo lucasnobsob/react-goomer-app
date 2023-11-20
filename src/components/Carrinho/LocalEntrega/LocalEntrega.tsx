@@ -38,6 +38,10 @@ export default function LocalEntrega() {
     setEndereco({ ...endereco, uf: novaUF });
   };
 
+  const invalid = {
+    border: "2px solid red !important",
+  };
+
   return (
     <div
       id="localEntrega"
@@ -49,6 +53,7 @@ export default function LocalEntrega() {
           <input
             id="txtCEP"
             type="text"
+            style={invalid}
             className="form-control"
             value={endereco.cep}
             onChange={handleCEPChange}
@@ -68,6 +73,7 @@ export default function LocalEntrega() {
             id="txtEndereco"
             type="text"
             className="form-control"
+            style={invalid}
             value={endereco.endereco}
             onChange={handleEnderecoChange}
           />
@@ -81,6 +87,7 @@ export default function LocalEntrega() {
             id="txtBairro"
             type="text"
             className="form-control"
+            style={invalid}
             value={endereco.bairro}
             onChange={handleBairroChange}
           />
@@ -94,6 +101,7 @@ export default function LocalEntrega() {
             id="txtNumero"
             type="text"
             className="form-control"
+            style={invalid}
             value={endereco.numero}
             onChange={handleNumeroChange}
           />
@@ -107,6 +115,7 @@ export default function LocalEntrega() {
             id="txtCidade"
             type="text"
             className="form-control"
+            style={invalid}
             value={endereco.cidade}
             onChange={handleCidadeChange}
           />
@@ -120,6 +129,7 @@ export default function LocalEntrega() {
             id="txtComplemento"
             type="text"
             className="form-control"
+            style={invalid}
             value={endereco.complemento}
             onChange={handleComplementoChange}
           />
@@ -129,7 +139,12 @@ export default function LocalEntrega() {
       <div className="col-12 col-lg-2 col-md-2 col-sm-12">
         <div className="form-group">
           <label>UF:</label>
-          <select id="ddlUf" className="form-control" onChange={handleUFChange}>
+          <select
+            id="ddlUf"
+            className="form-control"
+            style={invalid}
+            onChange={handleUFChange}
+          >
             <option value="-1">...</option>
             <option value="AC">AC</option>
             <option value="AL">AL</option>
